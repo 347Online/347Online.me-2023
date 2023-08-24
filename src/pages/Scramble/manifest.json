@@ -1,0 +1,6 @@
+{
+  "name": "3x3 Scrambler",
+  "icons": [],
+  "start_url": "/cube/scramble",
+  "display": "standalone"
+}
