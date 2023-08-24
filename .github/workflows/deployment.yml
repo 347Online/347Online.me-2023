@@ -27,4 +27,8 @@ jobs:
           cache: "yarn"
       - run: yarn
       - run: yarn build
+
+  post_build:
+    runs-on: ubuntu-latest
+    steps:
       - run: rsync -av --delete -e 'ssh -i ${{secrets.SSH_PRIVATE_KEY}}' "dist/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/${{secrets.DEST_PATH}}"
