@@ -8,6 +8,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <Landing />,
+    errorElement: <NotFound />
   },
   {
     path: "/social",
@@ -16,10 +17,6 @@ const routes: RouteObject[] = [
   {
     path: "/cube/scramble",
     element: <Scramble />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ];
 

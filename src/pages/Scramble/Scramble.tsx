@@ -5,27 +5,28 @@ import { randomScrambleForEvent } from "cubing/scramble";
 const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
 
-  const scramble = async () => {
-    const alg = await randomScrambleForEvent("333");
-    setAlgorithm(alg.toString());
-  };
-
-  const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.code === "Space") {
-      e.preventDefault();
-      console.log("Space!");
-      scramble();
-    }
+  const scramble = () => {
+    randomScrambleForEvent("333")
+      .then((alg) => setAlgorithm(alg.toString()))
+      .catch((e) => console.error(e));
   };
 
   useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        console.log("Space!");
+        scramble();
+      }
+    };
+
     window.addEventListener("keyup", handleKeyPress);
-    window.addEventListener("click", scramble);
+    window.addEventListener("click", () => scramble());
     scramble();
 
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
-      window.removeEventListener("click", scramble);
+      window.removeEventListener("click", () => scramble());
     };
   }, []);
 
