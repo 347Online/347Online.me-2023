@@ -8,7 +8,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <Landing />,
-    errorElement: <NotFound />
+    errorElement: <NotFound />,
   },
   {
     path: "/social",
