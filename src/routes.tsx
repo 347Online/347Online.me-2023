@@ -1,13 +1,14 @@
 import { RouteObject } from "react-router-dom";
-import Scramble from "./pages/Scramble/Scramble";
-import Landing from "./pages/Landing";
-import Social from "./pages/Social";
-import NotFound from "./pages/NotFound";
+import { Scramble } from "./pages/Scramble/Scramble";
+import { Landing } from "./pages/Landing";
+import { Social } from "./pages/Social";
+import { NotFound } from "./pages/NotFound";
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: "/",
     element: <Landing />,
+    errorElement: <NotFound />,
   },
   {
     path: "/social",
@@ -17,10 +18,4 @@ const routes: RouteObject[] = [
     path: "/cube/scramble",
     element: <Scramble />,
   },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
 ];
-
-export default routes;

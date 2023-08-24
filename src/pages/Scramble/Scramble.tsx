@@ -1,8 +1,8 @@
+import { randomScrambleForEvent } from "cubing/scramble";
 import "./Scramble.css";
 import { useEffect, useState } from "react";
-import { randomScrambleForEvent } from "cubing/scramble";
 
-const Scramble = () => {
+export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
 
   const scramble = async () => {
@@ -10,18 +10,18 @@ const Scramble = () => {
     setAlgorithm(alg.toString());
   };
 
-  const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.code === "Space") {
-      e.preventDefault();
-      console.log("Space!");
-      scramble();
-    }
-  };
-
   useEffect(() => {
+    scramble();
+    
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        scramble();
+      }
+    };
+
     window.addEventListener("keyup", handleKeyPress);
     window.addEventListener("click", scramble);
-    scramble();
 
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
@@ -59,5 +59,3 @@ const Scramble = () => {
     </div>
   );
 };
-
-export default Scramble;
