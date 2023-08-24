@@ -1,4 +1,4 @@
-import Link from "./common/Link";
+import Link from "../components/common/Link";
 
 const Social = () => (
   <>
