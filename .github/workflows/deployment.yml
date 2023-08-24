@@ -28,5 +28,5 @@ jobs:
           cache: 'yarn'
       - run: yarn
       - run: yarn build
-      - run: rsync -av "dist/${{secrets.SSH_HOST}}:/home/katie/website"
+      - run: rsync -av "dist/ ${{secrets.SSH_HOST}}:/home/katie/website"
       
