@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+
+import { randomScrambleForEvent } from "cubing/scramble";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [algorithm, setAlgorithm] = useState("Scrambling...");
+  const title = "Katie's Cube Scrambler";
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (e.code === "Space") {
+      e.preventDefault();
+      console.log("Space!");
+      scramble();
+    }
+  };
+
+  useEffect(() => {
+    document.title = title;
+
+    window.addEventListener("keyup", handleKeyPress);
+
+    return () => window.removeEventListener("keyup", handleKeyPress);
+  }, []);
+
+  const scramble = async () => {
+    const alg = await randomScrambleForEvent("333");
+    setAlgorithm(alg.toString());
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>{title}</h1>
+      <h2>{algorithm}</h2>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button id="scrambleBtn" onClick={scramble}>
+          Scramble
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
