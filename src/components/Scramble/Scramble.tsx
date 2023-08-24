@@ -1,4 +1,4 @@
-import "./Scramble.css"
+import "./Scramble.css";
 import { useEffect, useState } from "react";
 import { randomScrambleForEvent } from "cubing/scramble";
 
@@ -52,11 +52,13 @@ const Scramble = () => {
     </span>
   ));
 
+  const splitPoint = 11;
+
   return (
-    <>
-      <h1 className="scrambleText">{moves}</h1>
+    <div className="scramble-container">
+      <h1 className="scramble-text">{moves}</h1>
       <h2>Tap, click, or press space to rescramble</h2>
-    </>
+    </div>
   );
 };
 
