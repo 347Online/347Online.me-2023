@@ -44,3 +44,10 @@
 .scrambleText {
   font-family: monospace;
 }
+
+.scrambleText .move[data-color="white"] { color: rgb(235, 235, 235) }
+.scrambleText .move[data-color="yellow"] { color: gold }
+.scrambleText .move[data-color="green"] { color: rgb(34, 200, 34) }
+.scrambleText .move[data-color="blue"] { color: dodgerblue }
+.scrambleText .move[data-color="red"] { color: rgb(230, 34, 34) }
+.scrambleText .move[data-color="orange"] { color: darkorange }

@@ -23,15 +23,37 @@ function App() {
     return () => window.removeEventListener("keyup", handleKeyPress);
   }, []);
 
+  const getFaceColor = (move: string): string => {
+  const faceColors = {
+    U: "white",
+    D: "yellow",
+    F: "green",
+    B: "blue",
+    L: "orange",
+    R: "red",
+  };
+    const matches = move.match(/[UDFBLR]{1}/);
+    if (!matches) return "white";
+    
+    const face = matches[0] as keyof typeof faceColors;
+
+    return faceColors[face];
+  };
+
   const scramble = async () => {
     const alg = await randomScrambleForEvent("333");
     setAlgorithm(alg.toString());
   };
 
+  const moves = algorithm.split(" ").map((move) => (
+    <span className="move" data-color={getFaceColor(move)}>
+      {` ${move} `}
+    </span>
+  ));
+
   return (
     <>
-      <h1>{title}</h1>
-      <h2 className="scrambleText">{algorithm}</h2>
+      <h1 className="scrambleText">{moves}</h1>
       <div className="card">
         <button id="scrambleBtn" onClick={scramble}>
           Scramble
