@@ -1,21 +1,24 @@
+import Link from "./common/Link";
+
 const Social = () => (
   <>
     <h1>Social</h1>
     <p>
-      GitHub: <a href="">347Online</a>
+      GitHub: <Link to="https://github.com/347Online">347Online</Link>
     </p>
     <p>
-      itch.io: <a href="">Konundream</a>
+      itch.io: <Link to="https://konundream.itch.io">Konundream</Link>
     </p>
     <p>
-      Mastodon: <a href="https://tech.lgbt/@347online">@347Online@tech.lgbt</a>,{" "}
-      <a href="https://mastodon.gamedev.place/@Konundream">
+      Mastodon:&nbsp;
+      <Link to="https://tech.lgbt/@347online">@347Online@tech.lgbt</Link>,&nbsp;
+      <Link to="https://mastodon.gamedev.place/@Konundream">
         @Konundream@mastodon.gamedev.place
-      </a>
+      </Link>
     </p>
 
     <footer>
-      <a href="/">Home</a>
+      <Link to="/">Home</Link>
     </footer>
   </>
 );

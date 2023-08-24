@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Landing = () => {
   return (
     <>
@@ -5,7 +7,7 @@ const Landing = () => {
       <h2>Software Engineer | Game Developer</h2>
       Hiya! I'm Katie, nice to meetcha!
       <footer>
-        <a href="/social">Social</a>
+        <Link to="/social">Social</Link>
       </footer>
     </>
   );
