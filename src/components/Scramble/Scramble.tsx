@@ -52,8 +52,6 @@ const Scramble = () => {
     </span>
   ));
 
-  const splitPoint = 11;
-
   return (
     <div className="scramble-container">
       <h1 className="scramble-text">{moves}</h1>
