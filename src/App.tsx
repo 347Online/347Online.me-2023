@@ -17,8 +17,8 @@ function App() {
 
   useEffect(() => {
     document.title = title;
-
     window.addEventListener("keyup", handleKeyPress);
+    scramble();
 
     return () => window.removeEventListener("keyup", handleKeyPress);
   }, []);
@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <h1>{title}</h1>
-      <h2>{algorithm}</h2>
+      <h2 className="scrambleText">{algorithm}</h2>
       <div className="card">
         <button id="scrambleBtn" onClick={scramble}>
           Scramble
