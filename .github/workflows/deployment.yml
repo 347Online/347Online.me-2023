@@ -31,4 +31,4 @@ jobs:
   post_build:
     runs-on: ubuntu-latest
     steps:
-      - run: rsync -av --delete -e 'ssh -i ${{secrets.SSH_PRIVATE_KEY}}' "dist/ ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/katie/website"
+      - run: rsync -av --delete -e 'ssh -i ${{secrets.SSH_PRIVATE_KEY}}' dist/ "${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/katie/website"
