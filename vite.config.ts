@@ -10,4 +10,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["cubing"],
   },
+
+  worker: {
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true,
+      },
+    },
+  },
 });
