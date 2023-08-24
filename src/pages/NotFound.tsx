@@ -1,7 +1,7 @@
 import { useRouteError } from "react-router-dom";
 import Link from "../components/common/Link";
 
-const NotFound = () => {
+export const NotFound = () => {
   const error = useRouteError();
   console.warn(error);
 
@@ -12,5 +12,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;

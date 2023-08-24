@@ -1,6 +1,6 @@
 import Link from "../components/common/Link";
 
-const Social = () => (
+export const Social = () => (
   <>
     <h1>Social</h1>
     <p>
@@ -22,5 +22,3 @@ const Social = () => (
     </footer>
   </>
 );
-
-export default Social;

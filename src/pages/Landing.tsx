@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Landing = () => {
+export const Landing = () => {
   return (
     <div>
       <h1>Katie Janzen</h1>
@@ -12,5 +12,3 @@ const Landing = () => {
     </div>
   );
 };
-
-export default Landing;

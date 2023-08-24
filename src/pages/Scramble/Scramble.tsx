@@ -2,7 +2,7 @@ import "./Scramble.css";
 import { useEffect, useState } from "react";
 import { randomScrambleForEvent } from "cubing/scramble";
 
-const Scramble = () => {
+export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
 
   const scramble = () => {
@@ -60,5 +60,3 @@ const Scramble = () => {
     </div>
   );
 };
-
-export default Scramble;
