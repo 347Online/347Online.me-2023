@@ -27,4 +27,6 @@ jobs:
           cache: "yarn"
       - run: yarn
       - run: yarn build
-      - run: rsync -av --delete -e 'ssh -i ${{secrets.SSH_PRIVATE_KEY}}' dist/ "${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/katie/website"
+      - run: echo "${{secrets.SSH_PRIVATE_KEY}}" > deploy_key
+      - run: chmod 600 ./deploy_key
+      - run: rsync -av --delete -e 'ssh -i ./deploy_key' dist/ "${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/katie/website"
