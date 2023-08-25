@@ -12,7 +12,7 @@ export const Scramble = () => {
 
   useEffect(() => {
     scramble();
-    
+
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.code === "Space") {
         e.preventDefault();
@@ -53,9 +53,12 @@ export const Scramble = () => {
   ));
 
   return (
-    <div className="scramble-container">
-      <h1 className="scramble-text">{moves}</h1>
-      <h2>Tap, click, or press space to rescramble</h2>
-    </div>
+    <>
+      <link rel="manifest" href="/manifest.json" />
+      <div className="scramble-container">
+        <h1 className="scramble-text">{moves}</h1>
+        <h2>Tap, click, or press space to rescramble</h2>
+      </div>
+    </>
   );
 };
