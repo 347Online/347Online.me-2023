@@ -54,7 +54,7 @@ export const Scramble = () => {
 
   return (
     <>
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="manifest" href="scramble.sitemanifest" />
       <div className="scramble-container">
         <h1 className="scramble-text">{moves}</h1>
         <h2>Tap, click, or press space to rescramble</h2>
