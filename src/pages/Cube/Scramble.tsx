@@ -1,5 +1,5 @@
 import { Settings } from "@mui/icons-material";
-import { Button, Container, IconButton } from "@mui/material";
+import { Button, Container, IconButton, LinearProgress } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import "./Scramble.css";
@@ -56,7 +56,10 @@ export const Scramble = () => {
     <>
       <link rel="manifest" href="/manifest.json" />
       <div className="scramble-container">
-        <h1 className="scramble-text">{moves}</h1>
+        <div>
+          <h1 className="scramble-text">{moves}</h1>
+          <LinearProgress variant="determinate" value={50}/>
+        </div>
         <Button
           variant="contained"
           size="large"
