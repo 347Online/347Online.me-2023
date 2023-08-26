@@ -11,21 +11,21 @@ export const Scramble = () => {
   };
 
   useEffect(() => {
-    scramble();
+    void scramble();
 
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.code === "Space") {
         e.preventDefault();
-        scramble();
+        void scramble();
       }
     };
 
     window.addEventListener("keyup", handleKeyPress);
-    window.addEventListener("click", scramble);
+    window.addEventListener("click", () => void scramble());
 
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
-      window.removeEventListener("click", scramble);
+      window.removeEventListener("click", () => void scramble());
     };
   }, []);
 
