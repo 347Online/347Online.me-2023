@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import Link from "../components/common/Link";
+import Link from "@/components/Link";
 
 export const NotFound = () => {
   const error = useRouteError();
