@@ -1,8 +1,32 @@
 import { Settings } from "@mui/icons-material";
-import { Button, Container, IconButton, LinearProgress } from "@mui/material";
+import {
+  Button,
+  Grid,
+  IconButton,
+  CircularProgress,
+  ButtonProps,
+} from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import "./Scramble.css";
+
+const ScrambleButton = ({
+  auto,
+  ...props
+}: ButtonProps & { auto?: boolean }) => (
+  <Button
+    variant="contained"
+    size="large"
+    endIcon={
+      auto && (
+        <CircularProgress color="secondary" variant="determinate" value={86} />
+      )
+    }
+    {...props}
+  >
+    Scramble
+  </Button>
+);
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
@@ -55,19 +79,14 @@ export const Scramble = () => {
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
-      <div className="scramble-container">
-        <div>
+      <Grid className="scramble-container">
+        <Grid item>
           <h1 className="scramble-text">{moves}</h1>
-          <LinearProgress variant="determinate" value={50}/>
-        </div>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => void scramble()}
-        >
-          Scramble
-        </Button>
-      </div>
+        </Grid>
+        <Grid item>
+          <ScrambleButton onClick={() => void scramble()} />
+        </Grid>
+      </Grid>
       <IconButton size="large">
         <Settings
           color="primary"
