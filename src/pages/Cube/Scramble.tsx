@@ -1,6 +1,8 @@
+import { Settings } from "@mui/icons-material";
+import { Button, Container, IconButton } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
-import "./Scramble.css";
 import { useEffect, useState } from "react";
+import "./Scramble.css";
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
@@ -21,11 +23,9 @@ export const Scramble = () => {
     };
 
     window.addEventListener("keyup", handleKeyPress);
-    window.addEventListener("click", () => void scramble());
 
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
-      window.removeEventListener("click", () => void scramble());
     };
   }, []);
 
@@ -57,8 +57,20 @@ export const Scramble = () => {
       <link rel="manifest" href="/manifest.json" />
       <div className="scramble-container">
         <h1 className="scramble-text">{moves}</h1>
-        <h2>Tap, click, or press space to rescramble</h2>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => void scramble()}
+        >
+          Scramble
+        </Button>
       </div>
+      <IconButton size="large">
+        <Settings
+          color="primary"
+          sx={{ position: "fixed", top: 20, right: 20 }}
+        />
+      </IconButton>
     </>
   );
 };

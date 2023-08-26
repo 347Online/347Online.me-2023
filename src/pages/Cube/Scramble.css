@@ -1,16 +1,11 @@
 #root {
-  max-width: 640pt;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-}
-
-.scramble-container {
-  padding: 2em;
 }
 
 .scramble-text {
   font-family: monospace;
+  max-width: 640pt;
 }
 
 .scramble-text .move[data-color="white"] { color: rgb(235, 235, 235) }
