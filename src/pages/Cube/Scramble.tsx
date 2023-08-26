@@ -1,35 +1,22 @@
 import { Settings } from "@mui/icons-material";
 import {
   Button,
+  ButtonProps,
+  Checkbox,
+  CircularProgress,
+  Drawer,
+  DrawerProps,
+  FormControlLabel,
   Grid,
   IconButton,
-  CircularProgress,
-  ButtonProps,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import "./Scramble.css";
 
-const ScrambleButton = ({
-  auto,
-  ...props
-}: ButtonProps & { auto?: boolean }) => (
-  <Button
-    variant="contained"
-    size="large"
-    endIcon={
-      auto && (
-        <CircularProgress color="secondary" variant="determinate" value={86} />
-      )
-    }
-    {...props}
-  >
-    Scramble
-  </Button>
-);
-
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
+  const [showSettings, setShowSettings] = useState(false);
 
   const scramble = async () => {
     const alg = await randomScrambleForEvent("333");
@@ -87,12 +74,47 @@ export const Scramble = () => {
           <ScrambleButton onClick={() => void scramble()} />
         </Grid>
       </Grid>
-      <IconButton size="large">
+      <IconButton
+        size="large"
+        onClick={() => {
+          setShowSettings(true);
+        }}
+      >
         <Settings
           color="primary"
           sx={{ position: "fixed", top: 20, right: 20 }}
         />
       </IconButton>
+      <SettingsPanel
+        open={showSettings}
+        onClose={() => {
+          setShowSettings(false);
+        }}
+      />
     </>
   );
 };
+
+const ScrambleButton = ({
+  auto,
+  ...props
+}: ButtonProps & { auto?: boolean }) => (
+  <Button
+    variant="contained"
+    size="large"
+    endIcon={
+      auto && (
+        <CircularProgress color="secondary" variant="determinate" value={86} />
+      )
+    }
+    {...props}
+  >
+    Scramble
+  </Button>
+);
+
+const SettingsPanel = ({ open, ...props }: DrawerProps) => (
+  <Drawer open={open} anchor="right" {...props}>
+    <FormControlLabel label="Auto-Scramble" control={<Checkbox />} />
+  </Drawer>
+);
