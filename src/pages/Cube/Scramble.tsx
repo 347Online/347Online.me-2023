@@ -46,8 +46,8 @@ export const Scramble = () => {
     return faceColors[face];
   };
 
-  const moves = algorithm.split(" ").map((move) => (
-    <span className="move" data-color={getFaceColor(move)}>
+  const moves = algorithm.split(" ").map((move, index) => (
+    <span key={index} className="move" data-color={getFaceColor(move)}>
       {` ${move} `}
     </span>
   ));
