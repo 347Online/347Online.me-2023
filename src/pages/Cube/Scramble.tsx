@@ -37,14 +37,14 @@ const getFaceColor = (move: string): string => {
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
-  const [showSettings, setShowSettings] = useState(false);
 
-  const newScramble = async () => {
-    const alg = await randomScrambleForEvent("333");
-    setAlgorithm(alg.toString());
-  };
+  const newScramble = () =>
+    void (async () => {
+      const alg = await randomScrambleForEvent("333");
+      setAlgorithm(alg.toString());
+    })();
 
-  useEffect(() => void newScramble(), []);
+  useEffect(newScramble, []);
 
   const moves = algorithm.split(" ").map((move, index) => (
     <ScrambleTurn key={index} data-color={getFaceColor(move)}>
@@ -60,7 +60,7 @@ export const Scramble = () => {
           <ScrambleText>{moves}</ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleHandler onScramble={() => void newScramble()} />
+          <ScrambleHandler onScramble={newScramble} />
         </Grid>
       </Grid>
       <SettingsPanel />
@@ -147,7 +147,6 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
   );
 };
 
-// type SettingsPanelProps = Pick<DrawerProps, "open" | "onClose">;
 const SettingsPanel = () => {
   const [showSettings, setShowSettings] = useState(false);
   const { autoScramble, toggleAutoScramble } = useSettingsStore();
@@ -162,6 +161,7 @@ const SettingsPanel = () => {
         }}
       >
         <Settings
+          fontSize="inherit"
           color="primary"
           sx={{ position: "fixed", top: 20, right: 20 }}
         />
