@@ -13,10 +13,12 @@ import {
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import "./Scramble.css";
+import { useSettingsStore } from "./settings";
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const [showSettings, setShowSettings] = useState(false);
+  const { autoScramble } = useSettingsStore();
 
   const scramble = async () => {
     const alg = await randomScrambleForEvent("333");
@@ -71,7 +73,7 @@ export const Scramble = () => {
           <h1 className="scramble-text">{moves}</h1>
         </Grid>
         <Grid item>
-          <ScrambleButton onClick={() => void scramble()} />
+          <ScrambleButton auto={autoScramble} onClick={() => void scramble()} />
         </Grid>
       </Grid>
       <IconButton
@@ -113,8 +115,22 @@ const ScrambleButton = ({
   </Button>
 );
 
-const SettingsPanel = ({ open, ...props }: DrawerProps) => (
-  <Drawer open={open} anchor="right" {...props}>
-    <FormControlLabel label="Auto-Scramble" control={<Checkbox />} />
-  </Drawer>
-);
+const SettingsPanel = ({ open, ...props }: DrawerProps) => {
+  const { autoScramble, toggleAutoScramble } = useSettingsStore();
+
+  return (
+    <Drawer open={open} anchor="right" {...props}>
+      <FormControlLabel
+        label="Auto-Scramble"
+        control={
+          <Checkbox
+            checked={autoScramble}
+            onChange={() => {
+              toggleAutoScramble();
+            }}
+          />
+        }
+      />
+    </Drawer>
+  );
+};
