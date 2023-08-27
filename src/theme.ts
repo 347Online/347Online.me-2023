@@ -1,4 +1,4 @@
-import { ThemeOptions, createTheme } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 const cube = {
   white: "#EBEBEB",
@@ -15,7 +15,7 @@ declare module "@mui/material/styles" {
   interface Palette {
     cube: typeof cube;
   }
-  
+
   interface PaletteOptions {
     cube: typeof cube;
   }
@@ -25,5 +25,6 @@ export const theme = createTheme({
   palette: {
     cube,
     mode: "dark",
+    background: { default: "#242424" },
   },
 });
