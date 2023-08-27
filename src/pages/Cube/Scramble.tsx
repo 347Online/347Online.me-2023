@@ -17,9 +17,10 @@ import {
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useCallback, useEffect, useState } from "react";
 import { useSettingsStore } from "./settings";
+import { CubeColor } from "@/theme";
 
-const getFaceColor = (move: string): string => {
-  const faceColors = {
+const getFaceColor = (move: string): CubeColor => {
+  const faceColors: Record<string, CubeColor> = {
     U: "white",
     D: "yellow",
     F: "green",
@@ -30,9 +31,7 @@ const getFaceColor = (move: string): string => {
   const matches = move.match(/[UDFBLR]{1}/);
   if (!matches) return "white";
 
-  const face = matches[0] as keyof typeof faceColors;
-
-  return faceColors[face];
+  return faceColors[matches[0]];
 };
 
 export const Scramble = () => {
@@ -47,22 +46,30 @@ export const Scramble = () => {
   useEffect(newScramble, []);
 
   const moves = algorithm.split(" ").map((move, index) => (
-    <ScrambleTurn key={index} data-color={getFaceColor(move)}>
+    <ScrambleTurn key={index} faceColor={getFaceColor(move)}>
       {` ${move} `}
     </ScrambleTurn>
   ));
+  const halfway = Math.ceil(moves.length / 2);
+  const firstHalf = moves.slice(0, halfway);
+  const secondHalf = moves.slice(halfway);
 
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
       <Grid className="scramble-container">
         <Grid item>
-          <ScrambleText>{moves}</ScrambleText>
+          <ScrambleText>
+            {firstHalf}
+            <br />
+            {secondHalf}
+          </ScrambleText>
         </Grid>
         <Grid item>
           <ScrambleHandler onScramble={newScramble} />
         </Grid>
       </Grid>
+
       <SettingsPanel />
     </>
   );
@@ -77,7 +84,7 @@ const ScrambleText = ({ children }: ScrambleTextProps) => {
   return (
     <Typography
       variant="h1"
-      maxWidth="640pt"
+      // maxWidth="640pt"
       fontFamily="Monospace"
       fontWeight="bold"
       fontSize="3em"
@@ -89,33 +96,41 @@ const ScrambleText = ({ children }: ScrambleTextProps) => {
   );
 };
 
-const ScrambleTurn = styled("span")(({ theme }) =>
-  Object.fromEntries(
-    Object.entries(theme.palette.cube).map(([k, v]) => [
-      `&[data-color="${k}"]`,
-      { color: v },
-    ])
-  )
+interface ScrambleTurnProps {
+  faceColor: CubeColor;
+}
+const ScrambleTurn = styled("span")<ScrambleTurnProps>(
+  ({ theme, faceColor }) => ({
+    color: theme.palette.cube[faceColor],
+  })
 );
 
 interface ScrambleHandlerProps {
   onScramble: () => void;
 }
 const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
-  const { autoScramble } = useSettingsStore();
+  const { autoScramble, autoScrambleDelaySeconds } = useSettingsStore();
+  const [scrambleTime, setScrambleTime] = useState(0);
+  const [startup, setStartup] = useState(true);
+
+  const handleScramble = useCallback(() => {
+    setStartup(false);
+    setScrambleTime(0);
+    onScramble();
+  }, [onScramble]);
 
   const handleKeyUp = useCallback(
     (e: KeyboardEvent) => {
-      if (e.code === "Space") onScramble();
+      if (e.code === "Space") handleScramble();
     },
-    [onScramble]
+    [handleScramble]
   );
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
-      onScramble();
+      handleScramble();
     },
-    [onScramble]
+    [handleScramble]
   );
 
   useEffect(() => {
@@ -129,21 +144,19 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
   }, [handleKeyUp, handleClick]);
 
   return (
-    <Button
-      variant="contained"
-      size="large"
-      endIcon={
-        autoScramble && (
-          <CircularProgress
-            color="secondary"
-            variant="determinate"
-            value={86}
-          />
-        )
-      }
-    >
-      Scramble
-    </Button>
+    <>
+      {autoScramble && (
+        <CircularProgress
+          color="secondary"
+          variant="determinate"
+          value={scrambleTime / 100}
+          sx={{ transition: "none" }}
+        />
+      )}
+      {startup && (
+        <Typography variant="h5">Tap, click, or press space to scramble</Typography>
+      )}
+    </>
   );
 };
 
