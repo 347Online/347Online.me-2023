@@ -1,21 +1,27 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 interface SettingsState {
   autoScramble: boolean;
-  toggleAutoScramble: () => void;
+  autoScrambleDelaySeconds: number;
+  toggleAutoScramble: (enable?: boolean) => void;
+  setAutoScrambleDelay: (seconds: number) => void;
   resetSettings: () => void;
 }
 
-const defaults = { autoScramble: false };
+const defaults = { autoScramble: false, autoScrambleDelaySeconds: 60 };
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       ...defaults,
-      toggleAutoScramble: (enable?: boolean) => {
+      toggleAutoScramble: (enable) => {
         set((state) => ({ autoScramble: enable ?? !state.autoScramble }));
       },
+      setAutoScrambleDelay: (seconds) => {
+        set(() => ({ autoScrambleDelaySeconds: seconds }));
+      },
+
       resetSettings: () => {
         set(() => defaults);
       },

@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   Grid,
   IconButton,
+  Slider,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
@@ -131,6 +132,8 @@ const SettingsPanel = ({ open, ...props }: DrawerProps) => {
           />
         }
       />
+
+      <FormControlLabel label="Auto-Scramble Delay" control={<Slider />} />
     </Drawer>
   );
 };
