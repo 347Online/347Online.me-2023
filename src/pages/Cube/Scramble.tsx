@@ -10,6 +10,7 @@ import {
   Grid,
   IconButton,
   Slider,
+  styled,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
@@ -61,9 +62,9 @@ export const Scramble = () => {
   };
 
   const moves = algorithm.split(" ").map((move, index) => (
-    <span key={index} className="move" data-color={getFaceColor(move)}>
+    <ScrambleTurn key={index} className="move" data-color={getFaceColor(move)}>
       {` ${move} `}
-    </span>
+    </ScrambleTurn>
   ));
 
   return (
@@ -97,6 +98,15 @@ export const Scramble = () => {
     </>
   );
 };
+
+const ScrambleTurn = styled("span")(({ theme }) =>
+  Object.fromEntries(
+    Object.entries(theme.palette.cube).map(([k, v]) => [
+      `.scramble-text &[data-color="${k}"]`,
+      { color: v },
+    ])
+  )
+);
 
 const ScrambleButton = ({
   auto,

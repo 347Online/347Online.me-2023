@@ -1,12 +1,8 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { routes } from "./routes";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "./theme";
 
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
 const router = createBrowserRouter(routes);
 
 export const App = () => (

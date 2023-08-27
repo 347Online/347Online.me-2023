@@ -8,9 +8,11 @@
   max-width: 640pt;
 }
 
-.scramble-text .move[data-color="white"] { color: rgb(235, 235, 235) }
+/* .scramble-text .move[data-color="white"] { color: rgb(235, 235, 235) }
 .scramble-text .move[data-color="yellow"] { color: gold }
 .scramble-text .move[data-color="green"] { color: rgb(34, 200, 34) }
 .scramble-text .move[data-color="blue"] { color: dodgerblue }
-.scramble-text .move[data-color="red"] { color: rgb(230, 34, 34) }
 .scramble-text .move[data-color="orange"] { color: darkorange }
+
+.scramble-text .move[data-color="red"] { color: rgb(230, 34, 34) }
+*/
