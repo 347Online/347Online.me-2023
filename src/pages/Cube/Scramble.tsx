@@ -60,26 +60,10 @@ export const Scramble = () => {
           <ScrambleText>{moves}</ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleButton onScramble={() => void newScramble()} />
+          <ScrambleHandler onScramble={() => void newScramble()} />
         </Grid>
       </Grid>
-      <IconButton
-        size="large"
-        onClick={() => {
-          setShowSettings(true);
-        }}
-      >
-        <Settings
-          color="primary"
-          sx={{ position: "fixed", top: 20, right: 20 }}
-        />
-      </IconButton>
-      <SettingsPanel
-        open={showSettings}
-        onClose={() => {
-          setShowSettings(false);
-        }}
-      />
+      <SettingsPanel />
     </>
   );
 };
@@ -114,8 +98,10 @@ const ScrambleTurn = styled("span")(({ theme }) =>
   )
 );
 
-type ScrambleButtonProps = ButtonProps & { onScramble: () => void };
-const ScrambleButton = ({ onScramble, ...props }: ScrambleButtonProps) => {
+interface ScrambleHandlerProps {
+  onScramble: () => void;
+}
+const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
   const { autoScramble } = useSettingsStore();
 
   const handleKeyUp = useCallback(
@@ -125,13 +111,22 @@ const ScrambleButton = ({ onScramble, ...props }: ScrambleButtonProps) => {
     [onScramble]
   );
 
+  const handleClick = useCallback(
+    (e: MouseEvent) => {
+      onScramble();
+    },
+    [onScramble]
+  );
+
   useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
+    document.addEventListener("click", handleClick);
 
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
+      document.removeEventListener("click", handleClick);
     };
-  }, [handleKeyUp]);
+  }, [handleKeyUp, handleClick]);
 
   return (
     <Button
@@ -146,33 +141,55 @@ const ScrambleButton = ({ onScramble, ...props }: ScrambleButtonProps) => {
           />
         )
       }
-      onClick={onScramble}
-      {...props}
     >
       Scramble
     </Button>
   );
 };
 
-type SettingsPanelProps = DrawerProps;
-const SettingsPanel = ({ open, ...props }: SettingsPanelProps) => {
+// type SettingsPanelProps = Pick<DrawerProps, "open" | "onClose">;
+const SettingsPanel = () => {
+  const [showSettings, setShowSettings] = useState(false);
   const { autoScramble, toggleAutoScramble } = useSettingsStore();
 
   return (
-    <Drawer open={open} anchor="right" {...props}>
-      <FormControlLabel
-        label="Rescramble automatically"
-        control={
-          <Checkbox
-            checked={autoScramble}
-            onChange={() => {
-              toggleAutoScramble();
-            }}
-          />
-        }
-      />
+    <>
+      <IconButton
+        size="large"
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowSettings(true);
+        }}
+      >
+        <Settings
+          color="primary"
+          sx={{ position: "fixed", top: 20, right: 20 }}
+        />
+      </IconButton>
+      <Drawer
+        anchor="right"
+        open={showSettings}
+        onClose={(e: React.SyntheticEvent, reason) => {
+          if (reason === "backdropClick") {
+            e.stopPropagation();
+          }
+          setShowSettings(false);
+        }}
+      >
+        <FormControlLabel
+          label="Rescramble automatically"
+          control={
+            <Checkbox
+              checked={autoScramble}
+              onChange={() => {
+                toggleAutoScramble();
+              }}
+            />
+          }
+        />
 
-      <FormControlLabel label="Auto-Scramble Delay" control={<Slider />} />
-    </Drawer>
+        <FormControlLabel label="Auto-Scramble Delay" control={<Slider />} />
+      </Drawer>
+    </>
   );
 };
