@@ -10,21 +10,46 @@ import {
   Grid,
   IconButton,
   Slider,
+  Typography,
   styled,
+  useTheme,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
-import { useEffect, useState } from "react";
-import "./Scramble.css";
+import { useEffect, useRef, useState } from "react";
 import { useSettingsStore } from "./settings";
+
+const getFaceColor = (move: string): string => {
+  const faceColors = {
+    U: "white",
+    D: "yellow",
+    F: "green",
+    B: "blue",
+    L: "orange",
+    R: "red",
+  };
+  const matches = move.match(/[UDFBLR]{1}/);
+  if (!matches) return "white";
+
+  const face = matches[0] as keyof typeof faceColors;
+
+  return faceColors[face];
+};
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const [showSettings, setShowSettings] = useState(false);
-  const { autoScramble } = useSettingsStore();
 
   const scramble = async () => {
     const alg = await randomScrambleForEvent("333");
     setAlgorithm(alg.toString());
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.code === "Space") {
+      console.log("Space!");
+      e.preventDefault();
+      void scramble();
+    }
   };
 
   useEffect(() => {
@@ -37,32 +62,15 @@ export const Scramble = () => {
       }
     };
 
-    window.addEventListener("keyup", handleKeyPress);
+    // window.addEventListener("keyup", handleKeyPress);
 
     return () => {
-      window.removeEventListener("keyup", handleKeyPress);
+      // window.removeEventListener("keyup", handleKeyPress);
     };
   }, []);
 
-  const getFaceColor = (move: string): string => {
-    const faceColors = {
-      U: "white",
-      D: "yellow",
-      F: "green",
-      B: "blue",
-      L: "orange",
-      R: "red",
-    };
-    const matches = move.match(/[UDFBLR]{1}/);
-    if (!matches) return "white";
-
-    const face = matches[0] as keyof typeof faceColors;
-
-    return faceColors[face];
-  };
-
   const moves = algorithm.split(" ").map((move, index) => (
-    <ScrambleTurn key={index} className="move" data-color={getFaceColor(move)}>
+    <ScrambleTurn key={index} data-color={getFaceColor(move)}>
       {` ${move} `}
     </ScrambleTurn>
   ));
@@ -72,10 +80,10 @@ export const Scramble = () => {
       <link rel="manifest" href="/manifest.json" />
       <Grid className="scramble-container">
         <Grid item>
-          <h1 className="scramble-text">{moves}</h1>
+          <ScrambleText>{moves}</ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleButton auto={autoScramble} onClick={() => void scramble()} />
+          <ScrambleButton scramble={() => void scramble()} />
         </Grid>
       </Grid>
       <IconButton
@@ -99,32 +107,76 @@ export const Scramble = () => {
   );
 };
 
+const ScrambleText = (props: { children: React.ReactNode }) => {
+  const theme = useTheme();
+
+  return (
+    <Typography
+      variant="h1"
+      maxWidth="640pt"
+      fontFamily="Monospace"
+      fontWeight="bold"
+      fontSize="3em"
+      lineHeight="1.1"
+      sx={{ padding: theme.spacing(3) }}
+    >
+      {props.children}
+    </Typography>
+  );
+};
+
 const ScrambleTurn = styled("span")(({ theme }) =>
   Object.fromEntries(
     Object.entries(theme.palette.cube).map(([k, v]) => [
-      `.scramble-text &[data-color="${k}"]`,
+      `&[data-color="${k}"]`,
       { color: v },
     ])
   )
 );
 
 const ScrambleButton = ({
-  auto,
+  scramble,
   ...props
-}: ButtonProps & { auto?: boolean }) => (
-  <Button
-    variant="contained"
-    size="large"
-    endIcon={
-      auto && (
-        <CircularProgress color="secondary" variant="determinate" value={86} />
-      )
-    }
-    {...props}
-  >
-    Scramble
-  </Button>
-);
+}: ButtonProps & { scramble: () => void }) => {
+  const { autoScramble } = useSettingsStore();
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (e.code === "Space") scramble();
+  };
+
+  useEffect(() => {
+    // buttonInput.current?.focus();
+    document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
+
+  const handleClick = () => {
+    scramble();
+  };
+
+  return (
+    <Button
+      variant="contained"
+      size="large"
+      endIcon={
+        autoScramble && (
+          <CircularProgress
+            color="secondary"
+            variant="determinate"
+            value={86}
+          />
+        )
+      }
+      onClick={handleClick}
+      {...props}
+    >
+      Scramble
+    </Button>
+  );
+};
 
 const SettingsPanel = ({ open, ...props }: DrawerProps) => {
   const { autoScramble, toggleAutoScramble } = useSettingsStore();
@@ -132,7 +184,7 @@ const SettingsPanel = ({ open, ...props }: DrawerProps) => {
   return (
     <Drawer open={open} anchor="right" {...props}>
       <FormControlLabel
-        label="Auto-Scramble"
+        label="Rescramble automatically"
         control={
           <Checkbox
             checked={autoScramble}
