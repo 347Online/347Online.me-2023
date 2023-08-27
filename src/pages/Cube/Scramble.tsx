@@ -15,7 +15,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSettingsStore } from "./settings";
 
 const getFaceColor = (move: string): string => {
@@ -39,35 +39,12 @@ export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const [showSettings, setShowSettings] = useState(false);
 
-  const scramble = async () => {
+  const newScramble = async () => {
     const alg = await randomScrambleForEvent("333");
     setAlgorithm(alg.toString());
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.code === "Space") {
-      console.log("Space!");
-      e.preventDefault();
-      void scramble();
-    }
-  };
-
-  useEffect(() => {
-    void scramble();
-
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
-        e.preventDefault();
-        void scramble();
-      }
-    };
-
-    // window.addEventListener("keyup", handleKeyPress);
-
-    return () => {
-      // window.removeEventListener("keyup", handleKeyPress);
-    };
-  }, []);
+  useEffect(() => void newScramble(), []);
 
   const moves = algorithm.split(" ").map((move, index) => (
     <ScrambleTurn key={index} data-color={getFaceColor(move)}>
@@ -83,7 +60,7 @@ export const Scramble = () => {
           <ScrambleText>{moves}</ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleButton scramble={() => void scramble()} />
+          <ScrambleButton onScramble={() => void newScramble()} />
         </Grid>
       </Grid>
       <IconButton
@@ -107,7 +84,10 @@ export const Scramble = () => {
   );
 };
 
-const ScrambleText = (props: { children: React.ReactNode }) => {
+interface ScrambleTextProps {
+  children: React.ReactNode;
+}
+const ScrambleText = ({ children }: ScrambleTextProps) => {
   const theme = useTheme();
 
   return (
@@ -120,7 +100,7 @@ const ScrambleText = (props: { children: React.ReactNode }) => {
       lineHeight="1.1"
       sx={{ padding: theme.spacing(3) }}
     >
-      {props.children}
+      {children}
     </Typography>
   );
 };
@@ -134,28 +114,24 @@ const ScrambleTurn = styled("span")(({ theme }) =>
   )
 );
 
-const ScrambleButton = ({
-  scramble,
-  ...props
-}: ButtonProps & { scramble: () => void }) => {
+type ScrambleButtonProps = ButtonProps & { onScramble: () => void };
+const ScrambleButton = ({ onScramble, ...props }: ScrambleButtonProps) => {
   const { autoScramble } = useSettingsStore();
 
-  const handleKeyUp = (e: KeyboardEvent) => {
-    if (e.code === "Space") scramble();
-  };
+  const handleKeyUp = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.code === "Space") onScramble();
+    },
+    [onScramble]
+  );
 
   useEffect(() => {
-    // buttonInput.current?.focus();
     document.addEventListener("keyup", handleKeyUp);
 
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
-
-  const handleClick = () => {
-    scramble();
-  };
+  }, [handleKeyUp]);
 
   return (
     <Button
@@ -170,7 +146,7 @@ const ScrambleButton = ({
           />
         )
       }
-      onClick={handleClick}
+      onClick={onScramble}
       {...props}
     >
       Scramble
@@ -178,7 +154,8 @@ const ScrambleButton = ({
   );
 };
 
-const SettingsPanel = ({ open, ...props }: DrawerProps) => {
+type SettingsPanelProps = DrawerProps;
+const SettingsPanel = ({ open, ...props }: SettingsPanelProps) => {
   const { autoScramble, toggleAutoScramble } = useSettingsStore();
 
   return (
