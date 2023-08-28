@@ -3,13 +3,14 @@ import { Grid, useTheme } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import { getFaceColor } from "../util";
+import { ScrambleHandler } from "./ScrambleHandler";
 import { ScrambleText, ScrambleTurn } from "./ScrambleText";
 import { SettingsPanel } from "./SettingsPanel";
 import { useScrambleSettings } from "./settings";
-import { ScrambleHandler } from "./ScrambleHandler";
 
 export const Scramble = () => {
   const [active, setActive] = useState(true);
+  const [hint, setHint] = useState(false);
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
@@ -19,10 +20,11 @@ export const Scramble = () => {
     void (async () => {
       const alg = await randomScrambleForEvent("333");
       setAlgorithm(alg.toString());
+      if (!hint) setHint(true);
     })();
   };
 
-  useEffect(newScramble, []);
+  useEffect(newScramble, [hint]);
 
   const moves = algorithm.split(" ").map((move, index) => (
     <ScrambleTurn key={index} faceColor={getFaceColor(move)}>
@@ -50,7 +52,11 @@ export const Scramble = () => {
           </ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleHandler active={active} onScramble={newScramble} />
+          <ScrambleHandler
+            hint={hint}
+            active={active}
+            onScramble={newScramble}
+          />
         </Grid>
       </Grid>
 

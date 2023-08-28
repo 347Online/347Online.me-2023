@@ -15,7 +15,10 @@ export const ScrambleText = ({ children }: ScrambleTextProps) => {
       fontWeight="bold"
       fontSize="3em"
       lineHeight="1.1"
-      sx={{ padding: theme.spacing(3) }}
+      sx={{
+        padding: { xs: theme.spacing(2), sm: theme.spacing(3) },
+        minHeight: { xs: "416px", sm: 0 },
+      }}
     >
       {children}
     </Typography>
