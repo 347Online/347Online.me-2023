@@ -34,7 +34,7 @@ const getFaceColor = (move: string): CubeColor => {
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
-  const scrambleSettings = useScrambleSettings;
+  const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
 
   const newScramble = () =>
