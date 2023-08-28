@@ -1,6 +1,7 @@
 import { CircularProgress, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useScrambleSettings } from "./settings";
+import { percentage } from "@/util";
 
 interface ScrambleHandlerProps {
   active: boolean;
@@ -12,13 +13,33 @@ export const ScrambleHandler = ({
   onScramble,
 }: ScrambleHandlerProps) => {
   const { autoScramble, autoScrambleDelaySeconds } = useScrambleSettings();
-  const [ticking, setTicking] = useState(true);
+  const [ticking, setTicking] = useState(false);
   const [scrambleTime, setScrambleTime] = useState(0);
+  const delay = autoScrambleDelaySeconds * 100;
+  const interval = useRef<ReturnType<typeof setInterval>>();
+
+  const startTimer = useCallback(() => {
+    interval.current = setInterval(() => {
+      setScrambleTime((time) => (time > delay ? time - delay : time + 10));
+    }, 100);
+    setTicking(true);
+  }, [delay]);
+
+  const stopTimer = () => {
+    clearInterval(interval.current);
+    setTicking(false);
+    setScrambleTime(0);
+  };
 
   const handleScramble = useCallback(() => {
     if (!active) return;
+
+    if (autoScramble && !ticking) {
+      startTimer();
+    }
+
     onScramble();
-  }, [active, onScramble]);
+  }, [active, autoScramble, onScramble, startTimer, ticking]);
 
   const handleKeyUp = useCallback(
     (e: KeyboardEvent) => {
@@ -47,14 +68,13 @@ export const ScrambleHandler = ({
     };
   });
 
-  if (autoScramble && !ticking) {
+  if (autoScramble && ticking) {
     return (
       <>
         {scrambleTime}
         <CircularProgress
           variant="determinate"
-          value={scrambleTime / 10}
-          sx={{ transition: "none" }}
+          value={percentage(scrambleTime, delay)}
         />
       </>
     );
