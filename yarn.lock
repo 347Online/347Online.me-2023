@@ -1028,10 +1028,10 @@ csstype@^3.0.2, csstype@^3.1.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
-cubing@^0.40.0:
-  version "0.40.0"
-  resolved "https://registry.yarnpkg.com/cubing/-/cubing-0.40.0.tgz#68eacbcf8055faf4313aee5f156ba7849e69ea09"
-  integrity sha512-DYTg4HMgF22zucQoTuwHohvh6Cb6T5tII2nHnTNXNQAWFi/psAH4EDGhrkcWRVvKxhORkZ0EIHEWQK2HJcX3Tw==
+cubing@^0.41.0:
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/cubing/-/cubing-0.41.0.tgz#3d3a57a03cbe7f4574f6e5acb592af85410600fa"
+  integrity sha512-ACuOFZGRWJoDzovxO7hGoiD6FKNMlCGXamHVn/9FtWm5j60ORU0MQ/jgJypSx0QRWCzEoRdnE2HHReE3WQ06CQ==
   dependencies:
     "@types/three" "^0.149.0"
     "@types/web-bluetooth" "^0.0.16"
@@ -1961,6 +1961,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 vite@^4.4.5:
   version "4.4.9"
   resolved "https://registry.yarnpkg.com/vite/-/vite-4.4.9.tgz#1402423f1a2f8d66fd8d15e351127c7236d29d3d"
@@ -2003,3 +2008,10 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zustand@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.1.tgz#0cd3a3e4756f21811bd956418fdc686877e8b3b0"
+  integrity sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==
+  dependencies:
+    use-sync-external-store "1.2.0"
