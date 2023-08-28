@@ -1,40 +1,49 @@
 import {
   Checkbox,
   Drawer,
+  DrawerProps,
   FormControlLabel,
   IconButton,
   Slider,
 } from "@mui/material";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useScrambleSettings } from "./settings";
 import { Settings } from "@mui/icons-material";
 
-export const SettingsPanel = () => {
+interface SettingsPanelProps {
+  onShow?: () => void;
+  onHide?: () => void;
+}
+
+export const SettingsPanel = ({ onShow, onHide }: SettingsPanelProps) => {
   const [showSettings, setShowSettings] = useState(false);
   const { autoScramble, toggleAutoScramble } = useScrambleSettings();
+
+  const handleShow = (e: SyntheticEvent) => {
+    e.stopPropagation();
+
+    setShowSettings(true);
+    onShow?.();
+  };
+
+  type Reason = "backdropClick" | "escapeKeyDown";
+  const handleHide = (e: SyntheticEvent, reason: Reason) => {
+    if (reason === "backdropClick") e.stopPropagation();
+
+    setShowSettings(false);
+    onHide?.();
+  };
 
   return (
     <>
       <IconButton
         size="large"
-        onClick={(e) => {
-          e.stopPropagation();
-          setShowSettings(true);
-        }}
+        onClick={handleShow}
         sx={{ position: "fixed", top: 20, right: 20 }}
       >
         <Settings fontSize="inherit" color="primary" />
       </IconButton>
-      <Drawer
-        anchor="right"
-        open={showSettings}
-        onClose={(e: React.SyntheticEvent, reason) => {
-          if (reason === "backdropClick") {
-            e.stopPropagation();
-          }
-          setShowSettings(false);
-        }}
-      >
+      <Drawer anchor="right" open={showSettings} onClose={handleHide}>
         <FormControlLabel
           label="Rescramble automatically"
           control={
