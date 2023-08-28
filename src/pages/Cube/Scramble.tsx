@@ -1,3 +1,4 @@
+import { CubeColor } from "@/theme";
 import { Settings } from "@mui/icons-material";
 import {
   Checkbox,
@@ -12,9 +13,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useSettingsStore } from "./settings";
-import { CubeColor } from "@/theme";
+import { useCallback, useEffect, useState } from "react";
+import { useScrambleSettings } from "./settings";
+import { Debug } from "@/Debug";
 
 const getFaceColor = (move: string): CubeColor => {
   const faceColors: Record<string, CubeColor> = {
@@ -33,6 +34,7 @@ const getFaceColor = (move: string): CubeColor => {
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
+  const scrambleSettings = useScrambleSettings;
   const theme = useTheme();
 
   const newScramble = () =>
@@ -52,10 +54,11 @@ export const Scramble = () => {
   const firstHalf = moves.slice(0, halfway);
   const secondHalf = moves.slice(halfway);
 
+
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
-      <Debug />
+      <Debug expose={{ scrambleSettings }} />
       <Grid
         sx={{
           top: theme.spacing(10),
@@ -111,16 +114,8 @@ interface ScrambleHandlerProps {
   onScramble: () => void;
 }
 
-const Debug = () => {
-  const settings = useSettingsStore();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  (window as any).settings = settings;
-
-  return null;
-};
-
 const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
-  const { autoScramble, autoScrambleDelaySeconds } = useSettingsStore();
+  const { autoScramble, autoScrambleDelaySeconds } = useScrambleSettings();
   const [scrambleTime, setScrambleTime] = useState(0);
   const [startup, setStartup] = useState(true);
 
@@ -177,7 +172,7 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
 
 const SettingsPanel = () => {
   const [showSettings, setShowSettings] = useState(false);
-  const { autoScramble, toggleAutoScramble } = useSettingsStore();
+  const { autoScramble, toggleAutoScramble } = useScrambleSettings();
 
   return (
     <>
