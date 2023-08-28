@@ -1028,10 +1028,10 @@ csstype@^3.0.2, csstype@^3.1.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
-cubing@^0.41.0:
-  version "0.41.0"
-  resolved "https://registry.yarnpkg.com/cubing/-/cubing-0.41.0.tgz#3d3a57a03cbe7f4574f6e5acb592af85410600fa"
-  integrity sha512-ACuOFZGRWJoDzovxO7hGoiD6FKNMlCGXamHVn/9FtWm5j60ORU0MQ/jgJypSx0QRWCzEoRdnE2HHReE3WQ06CQ==
+cubing@^0.41.1:
+  version "0.41.1"
+  resolved "https://registry.yarnpkg.com/cubing/-/cubing-0.41.1.tgz#bad79a95ad8b7c19e396af6303972844bda97921"
+  integrity sha512-JrHY240aposedK9lKIrNukNi30/4OkNXTSL35eGoYDMXG08yGDkqtmCcf3fdwQDMWVZcBjKoXo9YPJzCKNKh4w==
   dependencies:
     "@types/three" "^0.149.0"
     "@types/web-bluetooth" "^0.0.16"

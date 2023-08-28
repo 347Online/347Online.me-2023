@@ -1,5 +1,6 @@
 import { useDebug } from "@/useDebug";
 import { Grid, useTheme } from "@mui/material";
+import { setSearchDebug } from "cubing/search";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import { getFaceColor } from "../util";
@@ -15,6 +16,8 @@ export const Scramble = () => {
   const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
   const { Debug } = useDebug();
+
+  setSearchDebug({ logPerf: false });
 
   const newScramble = () => {
     void (async () => {
