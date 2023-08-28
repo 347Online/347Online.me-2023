@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import { Scramble } from "./pages/Scramble/Scramble";
+import { Scramble } from "./pages/Cube/Scramble";
 import { Landing } from "./pages/Landing";
 import { Social } from "./pages/Social";
 import { NotFound } from "./pages/NotFound";
