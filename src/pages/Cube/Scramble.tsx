@@ -56,6 +56,7 @@ export const Scramble = () => {
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
+      <Debug />
       <Grid
         sx={{
           top: theme.spacing(10),
@@ -111,10 +112,18 @@ interface ScrambleHandlerProps {
   onScramble: () => void;
 }
 
+const Debug = () => {
+  const settings = useSettingsStore();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  (window as any).settings = settings;
+
+  return null;
+};
+
 const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
   const { autoScramble, autoScrambleDelaySeconds } = useSettingsStore();
   const [scrambleTime, setScrambleTime] = useState(0);
-  const [startup, setStartup] = useState(false);
+  const [startup, setStartup] = useState(true);
 
   const handleScramble = useCallback(() => {
     onScramble();
@@ -133,23 +142,27 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  });
+
+  useEffect(() => {
     document.addEventListener("click", handleClick);
 
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
-      document.removeEventListener("click", handleClick);
     };
-  }, [handleKeyUp, handleClick]);
+  });
 
   if (autoScramble && !startup) {
     return (
       <>
         {scrambleTime}
         <CircularProgress
-          id="progress"
-          color="secondary"
           variant="determinate"
-          value={scrambleTime}
+          value={scrambleTime / 10}
           sx={{ transition: "none" }}
         />
       </>
