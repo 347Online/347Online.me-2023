@@ -12,8 +12,8 @@ export const ScrambleHandler = ({
   onScramble,
 }: ScrambleHandlerProps) => {
   const { autoScramble, autoScrambleDelaySeconds } = useScrambleSettings();
+  const [ticking, setTicking] = useState(true);
   const [scrambleTime, setScrambleTime] = useState(0);
-  const [startup, setStartup] = useState(true);
 
   const handleScramble = useCallback(() => {
     if (!active) return;
@@ -47,7 +47,7 @@ export const ScrambleHandler = ({
     };
   });
 
-  if (autoScramble && !startup) {
+  if (autoScramble && !ticking) {
     return (
       <>
         {scrambleTime}
