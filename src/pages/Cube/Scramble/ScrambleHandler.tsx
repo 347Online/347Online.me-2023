@@ -3,17 +3,22 @@ import { useCallback, useEffect, useState } from "react";
 import { useScrambleSettings } from "./settings";
 
 interface ScrambleHandlerProps {
+  active: boolean;
   onScramble: () => void;
 }
 
-export const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
+export const ScrambleHandler = ({
+  active,
+  onScramble,
+}: ScrambleHandlerProps) => {
   const { autoScramble, autoScrambleDelaySeconds } = useScrambleSettings();
   const [scrambleTime, setScrambleTime] = useState(0);
   const [startup, setStartup] = useState(true);
 
   const handleScramble = useCallback(() => {
+    if (!active) return;
     onScramble();
-  }, [onScramble]);
+  }, [active, onScramble]);
 
   const handleKeyUp = useCallback(
     (e: KeyboardEvent) => {

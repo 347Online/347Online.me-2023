@@ -9,15 +9,17 @@ import { useScrambleSettings } from "./settings";
 import { ScrambleHandler } from "./ScrambleHandler";
 
 export const Scramble = () => {
+  const [active, setActive] = useState(false);
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
 
-  const newScramble = () =>
+  const newScramble = () => {
     void (async () => {
       const alg = await randomScrambleForEvent("333");
       setAlgorithm(alg.toString());
     })();
+  };
 
   useEffect(newScramble, []);
 
@@ -47,11 +49,18 @@ export const Scramble = () => {
           </ScrambleText>
         </Grid>
         <Grid item>
-          <ScrambleHandler onScramble={newScramble} />
+          <ScrambleHandler active={active} onScramble={newScramble} />
         </Grid>
       </Grid>
 
-      <SettingsPanel />
+      <SettingsPanel
+        onShow={() => {
+          setActive(false);
+        }}
+        onHide={() => {
+          setActive(true);
+        }}
+      />
     </>
   );
 };
