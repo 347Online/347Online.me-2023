@@ -1,4 +1,4 @@
-import { Debug } from "@/Debug";
+import { useDebug } from "@/useDebug";
 import { Grid, useTheme } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
@@ -9,10 +9,11 @@ import { useScrambleSettings } from "./settings";
 import { ScrambleHandler } from "./ScrambleHandler";
 
 export const Scramble = () => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const [algorithm, setAlgorithm] = useState("Scrambling...");
   const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
+  const { Debug } = useDebug();
 
   const newScramble = () => {
     void (async () => {
@@ -35,7 +36,7 @@ export const Scramble = () => {
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
-      <Debug expose={{ scrambleSettings }} />
+      <Debug data={{ scrambleSettings }} />
       <Grid
         sx={{
           top: theme.spacing(10),
