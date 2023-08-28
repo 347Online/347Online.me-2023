@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface SettingsState {
+interface ScrambleSettings {
   autoScramble: boolean;
   autoScrambleDelaySeconds: number;
   toggleAutoScramble: (enable?: boolean) => void;
@@ -11,7 +11,7 @@ interface SettingsState {
 
 const defaults = { autoScramble: false, autoScrambleDelaySeconds: 60 };
 
-export const useSettingsStore = create<SettingsState>()(
+export const useScrambleSettings = create<ScrambleSettings>()(
   persist(
     (set) => ({
       ...defaults,
