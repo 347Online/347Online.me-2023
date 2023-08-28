@@ -1,36 +1,12 @@
-import { CubeColor } from "@/theme";
-import { Settings } from "@mui/icons-material";
-import {
-  Checkbox,
-  CircularProgress,
-  Drawer,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  Slider,
-  Typography,
-  styled,
-  useTheme,
-} from "@mui/material";
-import { randomScrambleForEvent } from "cubing/scramble";
-import { useCallback, useEffect, useState } from "react";
-import { useScrambleSettings } from "./settings";
 import { Debug } from "@/Debug";
-
-const getFaceColor = (move: string): CubeColor => {
-  const faceColors: Record<string, CubeColor> = {
-    U: "white",
-    D: "yellow",
-    F: "green",
-    B: "blue",
-    L: "orange",
-    R: "red",
-  };
-  const matches = move.match(/[UDFBLR]{1}/);
-  if (!matches) return "white";
-
-  return faceColors[matches[0]];
-};
+import { Grid, useTheme } from "@mui/material";
+import { randomScrambleForEvent } from "cubing/scramble";
+import { useEffect, useState } from "react";
+import { getFaceColor } from "../util";
+import { ScrambleText, ScrambleTurn } from "./ScrambleText";
+import { SettingsPanel } from "./SettingsPanel";
+import { useScrambleSettings } from "./settings";
+import { ScrambleHandler } from "./ScrambleHandler";
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
@@ -54,7 +30,6 @@ export const Scramble = () => {
   const firstHalf = moves.slice(0, halfway);
   const secondHalf = moves.slice(halfway);
 
-
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
@@ -77,139 +52,6 @@ export const Scramble = () => {
       </Grid>
 
       <SettingsPanel />
-    </>
-  );
-};
-
-interface ScrambleTextProps {
-  children: React.ReactNode;
-}
-const ScrambleText = ({ children }: ScrambleTextProps) => {
-  const theme = useTheme();
-
-  return (
-    <Typography
-      variant="h1"
-      fontFamily="Monospace"
-      fontWeight="bold"
-      fontSize="3em"
-      lineHeight="1.1"
-      sx={{ padding: theme.spacing(3) }}
-    >
-      {children}
-    </Typography>
-  );
-};
-
-interface ScrambleTurnProps {
-  faceColor: CubeColor;
-}
-const ScrambleTurn = styled("span")<ScrambleTurnProps>(
-  ({ theme, faceColor }) => ({
-    color: theme.palette.cube[faceColor],
-  })
-);
-
-interface ScrambleHandlerProps {
-  onScramble: () => void;
-}
-
-const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
-  const { autoScramble, autoScrambleDelaySeconds } = useScrambleSettings();
-  const [scrambleTime, setScrambleTime] = useState(0);
-  const [startup, setStartup] = useState(true);
-
-  const handleScramble = useCallback(() => {
-    onScramble();
-  }, [onScramble]);
-
-  const handleKeyUp = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.code === "Space") handleScramble();
-    },
-    [handleScramble]
-  );
-
-  const handleClick = useCallback(() => {
-    handleScramble();
-  }, [handleScramble]);
-
-  useEffect(() => {
-    document.addEventListener("keyup", handleKeyUp);
-
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  });
-
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-
-    return () => {
-      document.removeEventListener("keyup", handleKeyUp);
-    };
-  });
-
-  if (autoScramble && !startup) {
-    return (
-      <>
-        {scrambleTime}
-        <CircularProgress
-          variant="determinate"
-          value={scrambleTime / 10}
-          sx={{ transition: "none" }}
-        />
-      </>
-    );
-  } else {
-    return (
-      <Typography variant="h5">
-        Tap, click, or press space to scramble
-      </Typography>
-    );
-  }
-};
-
-const SettingsPanel = () => {
-  const [showSettings, setShowSettings] = useState(false);
-  const { autoScramble, toggleAutoScramble } = useScrambleSettings();
-
-  return (
-    <>
-      <IconButton
-        size="large"
-        onClick={(e) => {
-          e.stopPropagation();
-          setShowSettings(true);
-        }}
-        sx={{ position: "fixed", top: 20, right: 20 }}
-      >
-        <Settings fontSize="inherit" color="primary" />
-      </IconButton>
-      <Drawer
-        anchor="right"
-        open={showSettings}
-        onClose={(e: React.SyntheticEvent, reason) => {
-          if (reason === "backdropClick") {
-            e.stopPropagation();
-          }
-          setShowSettings(false);
-        }}
-      >
-        <FormControlLabel
-          label="Rescramble automatically"
-          control={
-            <Checkbox
-              checked={autoScramble}
-              onChange={() => {
-                toggleAutoScramble();
-              }}
-            />
-          }
-        />
-
-        <FormControlLabel label="Auto-Scramble Delay" control={<Slider />} />
-      </Drawer>
     </>
   );
 };
