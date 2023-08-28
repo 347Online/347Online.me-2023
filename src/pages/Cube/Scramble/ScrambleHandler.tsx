@@ -25,11 +25,17 @@ export const ScrambleHandler = ({
     setTicking(true);
   }, [delay]);
 
-  const stopTimer = () => {
+  const stopTimer = useCallback(() => {
     clearInterval(interval.current);
     setTicking(false);
     setScrambleTime(0);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!active || !ticking) {
+      stopTimer();
+    }
+  });
 
   const handleScramble = useCallback(() => {
     if (!active) return;
