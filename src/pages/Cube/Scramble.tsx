@@ -15,7 +15,6 @@ import { randomScrambleForEvent } from "cubing/scramble";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSettingsStore } from "./settings";
 import { CubeColor } from "@/theme";
-import { normalize } from "@/util";
 
 const getFaceColor = (move: string): CubeColor => {
   const faceColors: Record<string, CubeColor> = {
