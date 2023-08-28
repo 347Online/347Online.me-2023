@@ -1,11 +1,8 @@
 import { Settings } from "@mui/icons-material";
 import {
-  Button,
-  ButtonProps,
   Checkbox,
   CircularProgress,
   Drawer,
-  DrawerProps,
   FormControlLabel,
   Grid,
   IconButton,
@@ -15,9 +12,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { randomScrambleForEvent } from "cubing/scramble";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSettingsStore } from "./settings";
 import { CubeColor } from "@/theme";
+import { normalize } from "@/util";
 
 const getFaceColor = (move: string): CubeColor => {
   const faceColors: Record<string, CubeColor> = {
@@ -36,6 +34,7 @@ const getFaceColor = (move: string): CubeColor => {
 
 export const Scramble = () => {
   const [algorithm, setAlgorithm] = useState("Scrambling...");
+  const theme = useTheme();
 
   const newScramble = () =>
     void (async () => {
@@ -57,8 +56,12 @@ export const Scramble = () => {
   return (
     <>
       <link rel="manifest" href="/manifest.json" />
-      <Grid className="scramble-container">
-        <Grid item>
+      <Grid
+        sx={{
+          top: theme.spacing(10),
+        }}
+      >
+        <Grid item mt={0}>
           <ScrambleText>
             {firstHalf}
             <br />
@@ -84,7 +87,6 @@ const ScrambleText = ({ children }: ScrambleTextProps) => {
   return (
     <Typography
       variant="h1"
-      // maxWidth="640pt"
       fontFamily="Monospace"
       fontWeight="bold"
       fontSize="3em"
@@ -108,14 +110,13 @@ const ScrambleTurn = styled("span")<ScrambleTurnProps>(
 interface ScrambleHandlerProps {
   onScramble: () => void;
 }
+
 const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
   const { autoScramble, autoScrambleDelaySeconds } = useSettingsStore();
   const [scrambleTime, setScrambleTime] = useState(0);
-  const [startup, setStartup] = useState(true);
+  const [startup, setStartup] = useState(false);
 
   const handleScramble = useCallback(() => {
-    setStartup(false);
-    setScrambleTime(0);
     onScramble();
   }, [onScramble]);
 
@@ -126,12 +127,9 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
     [handleScramble]
   );
 
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      handleScramble();
-    },
-    [handleScramble]
-  );
+  const handleClick = useCallback(() => {
+    handleScramble();
+  }, [handleScramble]);
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -143,21 +141,26 @@ const ScrambleHandler = ({ onScramble }: ScrambleHandlerProps) => {
     };
   }, [handleKeyUp, handleClick]);
 
-  return (
-    <>
-      {autoScramble && (
+  if (autoScramble && !startup) {
+    return (
+      <>
+        {scrambleTime}
         <CircularProgress
+          id="progress"
           color="secondary"
           variant="determinate"
-          value={scrambleTime / 100}
+          value={scrambleTime}
           sx={{ transition: "none" }}
         />
-      )}
-      {startup && (
-        <Typography variant="h5">Tap, click, or press space to scramble</Typography>
-      )}
-    </>
-  );
+      </>
+    );
+  } else {
+    return (
+      <Typography variant="h5">
+        Tap, click, or press space to scramble
+      </Typography>
+    );
+  }
 };
 
 const SettingsPanel = () => {
@@ -172,12 +175,9 @@ const SettingsPanel = () => {
           e.stopPropagation();
           setShowSettings(true);
         }}
+        sx={{ position: "fixed", top: 20, right: 20 }}
       >
-        <Settings
-          fontSize="inherit"
-          color="primary"
-          sx={{ position: "fixed", top: 20, right: 20 }}
-        />
+        <Settings fontSize="inherit" color="primary" />
       </IconButton>
       <Drawer
         anchor="right"
