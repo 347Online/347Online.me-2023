@@ -9,6 +9,8 @@ import { ScrambleText, ScrambleTurn } from "./ScrambleText";
 import { SettingsPanel } from "./SettingsPanel";
 import { useScrambleSettings } from "./settings";
 
+setSearchDebug({ logPerf: false });
+
 export const Scramble = () => {
   const [active, setActive] = useState(true);
   const [hint, setHint] = useState(false);
@@ -17,7 +19,6 @@ export const Scramble = () => {
   const theme = useTheme();
   const { Debug } = useDebug();
 
-  setSearchDebug({ logPerf: false });
 
   const newScramble = () => {
     void (async () => {
