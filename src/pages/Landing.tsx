@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "@/components/Link";
 
 export const Landing = () => {
   return (
@@ -7,6 +7,7 @@ export const Landing = () => {
       <h2>Software Engineer | Game Developer</h2>
       Hiya! I'm Katie, nice to meetcha!
       <footer>
+        <Link to="https://blog.347online.me/">Blog </Link>
         <Link to="/social">Social</Link>
       </footer>
     </div>

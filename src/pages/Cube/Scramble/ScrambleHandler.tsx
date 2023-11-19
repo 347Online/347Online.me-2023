@@ -89,7 +89,6 @@ export const ScrambleHandler = ({
     <Grid
       item
       display="flex"
-      direction="column"
       alignItems="center"
       justifyContent="center"
       sx={{ minHeight: "32px" }}

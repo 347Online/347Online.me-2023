@@ -1,5 +1,6 @@
 import { useDebug } from "@/useDebug";
 import { Grid, useTheme } from "@mui/material";
+import { setSearchDebug } from "cubing/search";
 import { randomScrambleForEvent } from "cubing/scramble";
 import { useEffect, useState } from "react";
 import { getFaceColor } from "../util";
@@ -8,6 +9,8 @@ import { ScrambleText, ScrambleTurn } from "./ScrambleText";
 import { SettingsPanel } from "./SettingsPanel";
 import { useScrambleSettings } from "./settings";
 
+setSearchDebug({ logPerf: false });
+
 export const Scramble = () => {
   const [active, setActive] = useState(true);
   const [hint, setHint] = useState(false);
@@ -15,6 +18,7 @@ export const Scramble = () => {
   const scrambleSettings = useScrambleSettings();
   const theme = useTheme();
   const { Debug } = useDebug();
+
 
   const newScramble = () => {
     void (async () => {
