@@ -14,10 +14,7 @@ export const Social = () => (
     </p>
     <p>
       Mastodon:&nbsp;
-      <Link to="https://tech.lgbt/@347online">@347Online@tech.lgbt</Link>,&nbsp;
-      <Link to="https://mastodon.gamedev.place/@Konundream">
-        @Konundream@mastodon.gamedev.place
-      </Link>
+      <Link to="https://hachyderm.io/@347Online">@347Online@tech.lgbt</Link>
     </p>
 
     <footer>
