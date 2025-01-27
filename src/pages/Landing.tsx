@@ -7,9 +7,9 @@ export const Landing = () => {
       <h2>Software Engineer | Game Developer</h2>
       Hiya! I'm Katie, nice to meetcha!
       <footer>
-        <Link to="https://blog.347online.me/">Blog</Link>
-        &nbsp;
-        <Link to="/social">Links</Link>
+        <Link to="https://blog.347online.me/">Blog</Link>&nbsp;
+        <Link to="/social">Links</Link>&nbsp; Resume:&nbsp;
+        <a href="/resume.html">HTML</a>,<a href="/resume.txt">TXT</a>
       </footer>
     </div>
   );
