@@ -1,0 +1,108 @@
+---
+title: Katie Janzen Resume 2025
+lang: en-US
+css: resume.css
+---
+
+# Katie Janzen
+
+Full-Stack Software Engineer
+
+---
+
+**Phone:** +1 (806) 654-6933  
+**Email:** katiejanzen@347online.me  
+**Website:** https://347online.me
+
+**LinkedIn:** https://www.linkedin.com/in/katie-janzen/  
+**GitHub:** https://github.com/347Online
+
+---
+
+## Qualifications
+
+- **Languages:** Nix, Rust, JavaScript / TypeScript, Python, Java
+- **Frameworks:** React, Redux, MUI, Node.js, Express, ViteJS, Webpack
+- **Databases:** PostgreSQL, MongoDB / Mongoose
+- **Testing:** Playwright, JUnit, Jest, Puppeteer, Supertest
+- **Web:** RESTful APIs, WebSockets
+
+---
+
+## Summary
+
+I've been writing software in one way or another for as long as I can remember. I got my start making games and fell in love with programming as a result. I’ve created full-stack web applications, video games, game modifications, custom tooling, even a command line interface for running a secret santa event. I'm a hard worker and if you need something done and done well, I'm your girl.
+
+## Experience [2011 - Present]{.end}
+
+#### Front-End Developer, Take Command Health Insurance Agency Inc. [2022 - 2024]{.end}
+
+SaaS Company offering Web Platform for Employers to manage a Health Reimbursement Arrangement for their Employees
+
+- Migrated product team’s selected design system build pipeline away from Create React App (deprecated shortly thereafter) to ViteJS delivering superior performance and greatly improved developer experience and iteration time
+- Built authorization architecture enforced on both backend event handler and front-end to gate functionality unavailable based on users’ permissions
+- Automated synchronization of defined backend permissions to frontend removing the need to redundantly modify defined permissions manually
+- Built backend rest API for Managing Company Records of Employees deployed to AWS Lambda
+- Created and maintained highly-customized ESLint configuration to automatically fix many common distractions in code reviews
+- Developed custom Django quick action to quickly and accurately repair frequently damaged company records
+
+### Open Source [2022 - Present]{.end}
+
+#### Nix Ecosystem [2024 - Present]{.end}
+
+Purely functional package manager, package repository, and toolset for fully declarative software packaging and configuration
+
+- 347OS, shared configuration spanning personal workstation, laptop, homelab server, and portable Neovim configuration featuring numerous plugins
+- Contributed derivation to nixpkgs for tsc.nvim by dmmulroy
+- Contributed module to NixVim for vim-be-good by ThePrimeagen
+
+#### Umpteen [2023 - Present]{.end}
+
+- Turing-complete Custom Programming Language preferring data immutability bootstrapped from Rust
+- Implemented language featureset including conditional and looping control flow, lexically-scoped variables, and first-class functions
+- Developed fully-functional Brainf\*ck interpreter in the newly implemented language as sample program
+
+#### Jesteer [2022]{.end}
+
+- Chrome Extension to automatically generate end-to-end testing for web apps, backed by Open Source Software Accelerator, OSLabs
+- Leveraged Google Chrome’s feature-rich extensions API to automate the generation of Puppeteer scripts, as well as integrating Jest’s testing functionality by injecting content scripts into active webpage which records user interactions, leading to expedited creation of end-to-end tests
+- Developed content scripts that register listeners to the active document, which report events back to the extension by implementing Chrome’s message passing API, enabling communication from one end of the application to the other
+- Further incorporated Jest and Puppeteer by building a comprehensive test suite which verifies that the extension is acting as intended, recording the interaction and generating the test correctly
+- Built a highly-functional and robust user interface for the extension using vanilla web technologies (HTML/CSS/JS)
+- Deployed to AWS using S3 for storage of static files and CloudFront to provide the secure socket layer in order to protect connection privacy
+
+---
+
+### Independent Video Games [2011 - Present]{.end}
+
+#### Coldlight [2020 - 2022]{.end}
+
+Arcade Action Game where players destroy enemy spacecraft to claim high scores
+
+- Orchestrated a system for a dynamic soundtrack with different tracks being played dependending on the ga†me state
+- Integrated Juju Adams and Alynne Keith’s Input library for seamless control across a wide variety of controller hardware
+- Created a complex underlying weapons system shared across the player and enemy objects alike, enabling rapid prototyping of new weapons
+
+#### A.C.E. - A Chromatic Experience [2016]{.end}
+
+Puzzle Platformer where players use color to collect keys and traverse various gates to solve puzzle
+
+- Designed level creation suite with intuitive user interface to enable creating new levels quickly, and allow players to create their own
+- Implemented a robust control system for keyboard and controller, delivering players the freedom to change controls to fit their needs
+
+#### Trapfall [2014]{.end}
+
+- One on One Competitive Online Multiplayer Experience with Host / Client architecture to play multiplayer matches over LAN / internet
+
+#### FutureShock [2011]{.end}
+
+- Vertical-Scrolling Arcade Shooter integrated with Pointed Games web API portal for uploading player high scores to earn 'pointed points’
+
+---
+
+### Public Presentations
+
+#### Straight from the SRC: How a Compiler Works | SingleSprout Speaker Series [2022]{.end}
+
+- Talk outlining how source code written by developers is converted into functional machine instructions
+- Detailed the transformations code goes through in a compiler toolchain from tokens to abstract syntax tree to bytecode/native instructions
