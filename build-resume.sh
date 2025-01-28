@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-(cd resume && ./build.sh)
 
-mv resume/out/* public/
+pandoc resume/resume.md -t plain -o public/resume.txt
+pandoc resume/resume.md -t html --template resume/template.html | prettier --stdin-filepath foo.html > public/resume.html
