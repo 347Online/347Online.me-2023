@@ -19,6 +19,7 @@
             name = "build-resume";
             runtimeInputs = with pkgs; [
               nodePackages.prettier
+              wkhtmltopdf
             ];
             text = builtins.readFile ./build-resume.sh;
           };
