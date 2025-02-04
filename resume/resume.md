@@ -38,7 +38,7 @@ ______________________________________________________________________
 ## Summary
 
 I've been writing software in one way or another for as long as I can remember.
-I’ve built full-stack web applications, video games and game modifications, even a command line interface for running a secret santa event. I'm a hard worker and if you need something done and done well, I'm your girl.
+I’ve built full-stack web applications, video games and game modifications, even a command line interface for running a secret santa event. I'm a hard worker and if you need something done and done well, then I'm your new developer.
 
 ## Experience                                                       [2011 - Present]{.end}
 
