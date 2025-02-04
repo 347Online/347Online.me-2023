@@ -29,6 +29,8 @@
                 template_path="resume/''${fname%.*}.template.html"
                 css_path="resume/''${fname%.*}.css"
 
+                cp resume/*.css public/
+
                 # Plaintext
                 pandoc "$x" -t plain -o "public/''${fname%.*}.txt"
 
