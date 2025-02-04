@@ -8,17 +8,10 @@ css: resume.css
 
 Full-Stack Software Engineer
 
----
+______________________________________________________________________
 
-**Phone:** +1 (806) 654-6933  
-**Email:** katiejanzen@347online.me  
-**Website:** https://347online.me
-
-**LinkedIn:** https://www.linkedin.com/in/katie-janzen/  
-**GitHub:** https://github.com/347Online
-
----
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: {.columns}
+::: {.column}
 ## Qualifications
 
 - **Languages:** Nix, Rust, JavaScript / TypeScript, Python, Java
@@ -26,17 +19,30 @@ Full-Stack Software Engineer
 - **Databases:** PostgreSQL, MongoDB / Mongoose
 - **Testing:** Playwright, JUnit, Jest, Puppeteer, Supertest
 - **Web:** RESTful APIs, WebSockets
+:::
+::: {.column}
+## Contact Info
 
----
+- **Phone:** +1 (806) 654-6933
+- **Email:** katiejanzen@347online.me
+- **Website:** https://347online.me
+- **LinkedIn:** https://www.linkedin.com/in/katie-janzen/
+- **GitHub:** https://github.com/347Online
+:::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
+______________________________________________________________________
 
 ## Summary
 
-I've been writing software in one way or another for as long as I can remember. I got my start making games and fell in love with programming as a result. I’ve created full-stack web applications, video games, game modifications, custom tooling, even a command line interface for running a secret santa event. I'm a hard worker and if you need something done and done well, I'm your girl.
+I've been writing software in one way or another for as long as I can remember.
+I’ve built full-stack web applications, video games and game modifications, even a command line interface for running a secret santa event. I'm a hard worker and if you need something done and done well, I'm your girl.
 
-## Experience [2011 - Present]{.end}
+## Experience                                                       [2011 - Present]{.end}
 
 #### Front-End Developer, Take Command Health Insurance Agency Inc. [2022 - 2024]{.end}
-
 SaaS Company offering Web Platform for Employers to manage a Health Reimbursement Arrangement for their Employees
 
 - Migrated product team’s selected design system build pipeline away from Create React App (deprecated shortly thereafter) to ViteJS delivering superior performance and greatly improved developer experience and iteration time
@@ -46,23 +52,22 @@ SaaS Company offering Web Platform for Employers to manage a Health Reimbursemen
 - Created and maintained highly-customized ESLint configuration to automatically fix many common distractions in code reviews
 - Developed custom Django quick action to quickly and accurately repair frequently damaged company records
 
-### Open Source [2022 - Present]{.end}
+### Open Source                                                     [2022 - Present]{.end}
 
-#### Nix Ecosystem [2024 - Present]{.end}
-
+#### Nix Ecosystem                                                  [2024 - Present]{.end}
 Purely functional package manager, package repository, and toolset for fully declarative software packaging and configuration
 
-- 347OS, shared configuration spanning personal workstation, laptop, homelab server, and portable Neovim configuration featuring numerous plugins
+- Shared system configuration spanning personal workstations, laptops, home servers, and portable Neovim setup
 - Contributed derivation to nixpkgs for tsc.nvim by dmmulroy
 - Contributed module to NixVim for vim-be-good by ThePrimeagen
 
-#### Umpteen [2023 - Present]{.end}
+#### Umpteen                                                        [2023 - Present]{.end}
 
 - Turing-complete Custom Programming Language preferring data immutability bootstrapped from Rust
 - Implemented language featureset including conditional and looping control flow, lexically-scoped variables, and first-class functions
-- Developed fully-functional Brainf\*ck interpreter in the newly implemented language as sample program
+- Developed fully-functional Brainf*ck interpreter in the newly implemented language as sample program
 
-#### Jesteer [2022]{.end}
+#### Jesteer                                                        [2022]{.end}
 
 - Chrome Extension to automatically generate end-to-end testing for web apps, backed by Open Source Software Accelerator, OSLabs
 - Leveraged Google Chrome’s feature-rich extensions API to automate the generation of Puppeteer scripts, as well as integrating Jest’s testing functionality by injecting content scripts into active webpage which records user interactions, leading to expedited creation of end-to-end tests
@@ -71,38 +76,38 @@ Purely functional package manager, package repository, and toolset for fully dec
 - Built a highly-functional and robust user interface for the extension using vanilla web technologies (HTML/CSS/JS)
 - Deployed to AWS using S3 for storage of static files and CloudFront to provide the secure socket layer in order to protect connection privacy
 
----
+______________________________________________________________________
 
-### Independent Video Games [2011 - Present]{.end}
+### Independent Video Games                                         [2011 - Present]{.end}
+<!-- TODO: "These are the games I've made" or smth -->
 
-#### Coldlight [2020 - 2022]{.end}
-
+#### Coldlight                                                      [2020 - 2022]{.end}
 Arcade Action Game where players destroy enemy spacecraft to claim high scores
 
-- Orchestrated a system for a dynamic soundtrack with different tracks being played dependending on the ga†me state
+- Orchestrated a system for a dynamic soundtrack with different tracks being played depending on the ga†me state
 - Integrated Juju Adams and Alynne Keith’s Input library for seamless control across a wide variety of controller hardware
 - Created a complex underlying weapons system shared across the player and enemy objects alike, enabling rapid prototyping of new weapons
 
-#### A.C.E. - A Chromatic Experience [2016]{.end}
-
+#### A.C.E. - A Chromatic Experience                                [2016]{.end}
 Puzzle Platformer where players use color to collect keys and traverse various gates to solve puzzle
 
 - Designed level creation suite with intuitive user interface to enable creating new levels quickly, and allow players to create their own
 - Implemented a robust control system for keyboard and controller, delivering players the freedom to change controls to fit their needs
 
-#### Trapfall [2014]{.end}
+#### Trapfall                                                       [2014]{.end}
 
 - One on One Competitive Online Multiplayer Experience with Host / Client architecture to play multiplayer matches over LAN / internet
 
-#### FutureShock [2011]{.end}
+#### FutureShock                                                    [2011]{.end}
 
 - Vertical-Scrolling Arcade Shooter integrated with Pointed Games web API portal for uploading player high scores to earn 'pointed points’
 
----
+______________________________________________________________________
 
 ### Public Presentations
 
-#### Straight from the SRC: How a Compiler Works | SingleSprout Speaker Series [2022]{.end}
+#### Straight from the SRC: How a Compiler Works                    [2022]{.end}
+Talk presented as part of SingleSprout's Speaker Series
 
-- Talk outlining how source code written by developers is converted into functional machine instructions
+- Outlined how source code written by developers is converted into functional machine instructions
 - Detailed the transformations code goes through in a compiler toolchain from tokens to abstract syntax tree to bytecode/native instructions

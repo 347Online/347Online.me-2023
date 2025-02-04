@@ -4,15 +4,6 @@ Full-Stack Software Engineer
 
 ------------------------------------------------------------------------
 
-Phone: +1 (806) 654-6933
-Email: katiejanzen@347online.me
-Website: https://347online.me
-
-LinkedIn: https://www.linkedin.com/in/katie-janzen/
-GitHub: https://github.com/347Online
-
-------------------------------------------------------------------------
-
 Qualifications
 
 -   Languages: Nix, Rust, JavaScript / TypeScript, Python, Java
@@ -21,16 +12,23 @@ Qualifications
 -   Testing: Playwright, JUnit, Jest, Puppeteer, Supertest
 -   Web: RESTful APIs, WebSockets
 
+Contact Info
+
+-   Phone: +1 (806) 654-6933
+-   Email: katiejanzen@347online.me
+-   Website: https://347online.me
+-   LinkedIn: https://www.linkedin.com/in/katie-janzen/
+-   GitHub: https://github.com/347Online
+
 ------------------------------------------------------------------------
 
 Summary
 
 I’ve been writing software in one way or another for as long as I can
-remember. I got my start making games and fell in love with programming
-as a result. I’ve created full-stack web applications, video games, game
-modifications, custom tooling, even a command line interface for running
-a secret santa event. I’m a hard worker and if you need something done
-and done well, I’m your girl.
+remember. I’ve built full-stack web applications, video games and game
+modifications, even a command line interface for running a secret santa
+event. I’m a hard worker and if you need something done and done well,
+I’m your girl.
 
 Experience 2011 - Present
 
@@ -62,9 +60,8 @@ Nix Ecosystem 2024 - Present
 Purely functional package manager, package repository, and toolset for
 fully declarative software packaging and configuration
 
--   347OS, shared configuration spanning personal workstation, laptop,
-    homelab server, and portable Neovim configuration featuring numerous
-    plugins
+-   Shared system configuration spanning personal workstations, laptops,
+    home servers, and portable Neovim setup
 -   Contributed derivation to nixpkgs for tsc.nvim by dmmulroy
 -   Contributed module to NixVim for vim-be-good by ThePrimeagen
 
@@ -109,7 +106,7 @@ Arcade Action Game where players destroy enemy spacecraft to claim high
 scores
 
 -   Orchestrated a system for a dynamic soundtrack with different tracks
-    being played dependending on the ga†me state
+    being played depending on the ga†me state
 -   Integrated Juju Adams and Alynne Keith’s Input library for seamless
     control across a wide variety of controller hardware
 -   Created a complex underlying weapons system shared across the player
@@ -140,10 +137,12 @@ FutureShock 2011
 
 Public Presentations
 
-Straight from the SRC: How a Compiler Works | SingleSprout Speaker Series 2022
+Straight from the SRC: How a Compiler Works 2022
 
--   Talk outlining how source code written by developers is converted
-    into functional machine instructions
+Talk presented as part of SingleSprout’s Speaker Series
+
+-   Outlined how source code written by developers is converted into
+    functional machine instructions
 -   Detailed the transformations code goes through in a compiler
     toolchain from tokens to abstract syntax tree to bytecode/native
     instructions
