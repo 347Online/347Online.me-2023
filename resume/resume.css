@@ -1,4 +1,7 @@
 @media print {
+  h1 {
+    margin-top: 0;
+  }
   .pagebreak {
     clear: both;
     page-break-after: always;
