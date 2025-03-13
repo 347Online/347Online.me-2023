@@ -101,11 +101,15 @@ Puzzle Platformer where players use color to collect keys and traverse various g
 
 #### Trapfall                                                       [2014]{.end}
 
-One on One Competitive Online Multiplayer Experience with Host / Client architecture to play multiplayer matches over LAN / internet
+One on One Competitive Online Multiplayer Experience
+
+- Built Host / Client architecture enabling players to have multiplayer matches over LAN / internet
 
 #### FutureShock                                                    [2011]{.end}
 
-Vertical-Scrolling Arcade Shooter integrated with Pointed Games web API portal for uploading player high scores to earn 'pointed points’
+Vertical-Scrolling Arcade Shooter
+
+- Integrated Pointed Games web portal API for uploading player high scores to earn 'pointed points’
 
 ______________________________________________________________________
 
