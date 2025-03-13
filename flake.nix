@@ -51,8 +51,10 @@
                 # HTML
                 eval "pandoc $x -t html $(template)" | prettier --stdin-filepath foo.html > "public/''${fname%.*}.html"
 
-                # PDF
-                eval "pandoc $x -t html $(template)$(css) -o public/''${fname%.*}.pdf"
+                echo "Don't forget to use Firefox Print to PDF for $fname"
+
+                # # PDF
+                # eval "pandoc $x -t html $(template)$(css) -o public/''${fname%.*}.pdf"
               done
             '';
           };
