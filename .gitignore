@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .direnv
+
+public/resume.*
+public/cover-letter.*
