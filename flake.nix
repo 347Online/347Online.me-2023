@@ -13,7 +13,10 @@
     utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnsupportedSystem = true;
+        };
         scripts = {
           build-resume = pkgs.writeShellApplication {
             name = "build-resume";
@@ -51,10 +54,8 @@
                 # HTML
                 eval "pandoc $x -t html $(template)" | prettier --stdin-filepath foo.html > "public/''${fname%.*}.html"
 
-                echo "Don't forget to use Firefox Print to PDF for $fname"
-
-                # # PDF
-                # eval "pandoc $x -t html $(template)$(css) -o public/''${fname%.*}.pdf"
+                # PDF
+                eval "pandoc $x -t html $(template)$(css) -o public/''${fname%.*}.pdf"
               done
             '';
           };
