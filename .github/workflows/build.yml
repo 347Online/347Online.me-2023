@@ -15,3 +15,7 @@ jobs:
       - run: |
           nix develop --command yarn
           nix develop --command yarn build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist
