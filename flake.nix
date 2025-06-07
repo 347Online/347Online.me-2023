@@ -27,6 +27,8 @@
             text = ''
               shopt -s globstar
 
+              mkdir public
+
               for x in resume/*.md; do
                 fname="$(basename "$x")"
                 template_path="resume/''${fname%.*}.template.html"

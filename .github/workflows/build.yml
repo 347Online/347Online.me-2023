@@ -10,4 +10,6 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - run: nix develop --command 'yarn && yarn build'
+      - run: |
+          nix develop --command yarn
+          nix develop --command yarn build
