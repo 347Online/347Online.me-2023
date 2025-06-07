@@ -1,5 +1,10 @@
 name: Deploy
 on:
+  workflow_run:
+    workflows: ["Build"]
+    branches: [main]
+    types:
+      - completed
   push:
     branches: [main]
   workflow_dispatch:
@@ -7,6 +12,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
       - run: |
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
