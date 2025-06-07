@@ -5,7 +5,7 @@ css: resume.css
 ---
 
 # Katie Janzen
-Full-Stack Software Engineer
+Senior Software Engineer (Full-Stack)
 
 ______________________________________________________________________
 
@@ -41,6 +41,9 @@ I'm a hard worker so if you need something done right, look no further: I'm your
 
 ## Experience                                                       [2011 - Present]{.end}
 
+#### Senior Software Engineer, Amplify Education                    [2025 - Present]{.end}
+TODO!
+
 #### Front-End Developer, Take Command Health Insurance Agency Inc. [2022 - 2024]{.end}
 
 SaaS Company offering Web Platform for Employers to manage a Health Reimbursement Arrangement for their Employees
@@ -67,16 +70,6 @@ Turing-complete Custom Programming Language preferring data immutability bootstr
 
 - Implemented language featureset including conditional and looping control flow, lexically-scoped variables, and first-class functions
 - Developed fully-functional Brainf\*ck interpreter in the newly implemented language as sample program
-
-#### Software Engineer, Jesteer | OSLabs                            [2022]{.end}
-
-Chrome Extension to automatically generate end-to-end testing for web apps, backed by Open Source Software Accelerator, OSLabs
-
-- Leveraged Google Chrome’s feature-rich extensions API to automate the generation of Puppeteer scripts, as well as integrating Jest’s testing functionality by injecting content scripts into active webpage which records user interactions, leading to expedited creation of end-to-end tests
-- Developed content scripts that register listeners to the active document, which report events back to the extension by implementing Chrome’s message passing API, enabling communication across differently privileged domains
-- Further incorporated Jest and Puppeteer by building a comprehensive test suite which verifies that the extension is acting as intended, recording the interaction and generating the test correctly
-- Built a highly-functional and robust user interface for the extension using vanilla web technologies (HTML/CSS/JS)
-- Deployed to AWS using S3 for storage of static files and CloudFront to provide the secure socket layer in order to protect connection privacy
 
 ______________________________________________________________________
 
