@@ -1,22 +1,21 @@
-name: Deploy
+name: Build
 on:
-  workflow_run:
-    workflows: ["Build"]
-    branches: [main]
-    types:
-      - completed
   push:
     branches: [main]
-  workflow_dispatch:
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - run: |
+          nix develop --command yarn
+          nix develop --command yarn build
           mkdir -p ~/.ssh/ && touch ~/.ssh/known_hosts
           ssh-keyscan ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
           echo "${{secrets.SSH_PRIVATE_KEY}}" > deploy_key
           chmod 600 ./deploy_key
+          ls -R artifact
           rsync -av --delete -e 'ssh -i ./deploy_key' dist/ "${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/home/katie/website"
