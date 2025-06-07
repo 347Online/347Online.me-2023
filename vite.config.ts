@@ -10,12 +10,6 @@ export default defineConfig({
       "@": path.join(__dirname, "src"),
     },
   },
-  server: {
-    port: 4000,
-  },
-  preview: {
-    port: 5000,
-  },
   optimizeDeps: {
     exclude: ["cubing"],
   },
